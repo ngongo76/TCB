@@ -60,7 +60,14 @@
     <tr><td>Nhãn kết quả</td><td>cờ vỡ nợ (quá hạn 90+ ngày trong 12 tháng)</td><td>Hệ thống thu hồi nợ / xóa nợ</td></tr>
   </table>
 
-  <h2>4. Prototype &amp; Đánh giá (MVP)</h2>
+  <h2>4. Sơ đồ luồng dữ liệu &amp; quy trình</h2>
+  <p>Sơ đồ tổng thể cho thấy dữ liệu đi từ các hệ thống nguồn, qua mô hình chấm điểm AI, đến quyết định phê duyệt — và sơ đồ trình tự mô tả cụ thể từng bước tương tác giữa khách hàng, hệ thống, và nhân viên tín dụng.</p>
+  <img class="fig" src="diagrams/p1_flow_vi.png" alt="Sơ đồ luồng dữ liệu Project 1">
+  <p class="caption">Hình 2. Sơ đồ luồng dữ liệu &amp; quy trình xử lý.</p>
+  <img class="fig" src="diagrams/p1_seq_vi.png" alt="Sơ đồ trình tự Project 1">
+  <p class="caption">Hình 3. Sơ đồ trình tự từ khi nộp hồ sơ đến khi có quyết định.</p>
+
+  <h2>5. Prototype &amp; Đánh giá (MVP)</h2>
   <p>Bộ dữ liệu giả lập (8.000 bản ghi, tỷ lệ vỡ nợ cơ sở ~14.8%) mô phỏng các thuộc tính trên; mô hình hồi quy logistic cơ bản được xây dựng để kiểm chứng phương pháp phân tích trước khi đề xuất cho AI Engineering xây mô hình cấp production.</p>
   <table>
     <tr><th>Chỉ số</th><th>Kết quả</th><th>Diễn giải</th></tr>
@@ -72,7 +79,7 @@
   <img class="fig" src="score_distribution.png" alt="Biểu đồ phân bố điểm rủi ro">
   <p class="caption">Hình 1. Phân bố xác suất vỡ nợ dự đoán, giữa nhóm vỡ nợ và không vỡ nợ, kèm ngưỡng rà soát đề xuất.</p>
 
-  <h2>5. Hạn chế &amp; Rủi ro</h2>
+  <h2>6. Hạn chế &amp; Rủi ro</h2>
   <ul>
     <li>Dữ liệu giả lập — các mẫu hình chỉ mang tính minh họa; cần re-validate trên dữ liệu lịch sử thật.</li>
     <li>Precision (~29%) phù hợp cho hàng đợi rà soát thủ công, không phù hợp để tự động từ chối.</li>
@@ -80,7 +87,7 @@
     <li>Khả năng giải thích được giữ nguyên nhờ dùng hồi quy logistic cho MVP; mô hình production cần giải thích dựa trên SHAP.</li>
   </ul>
 
-  <h2>6. Khung KPI / Metrics</h2>
+  <h2>7. Khung KPI / Metrics</h2>
   <table>
     <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
     <tr><td>AUC / KS mô hình (thực tế)</td><td>Hàng tháng</td><td>Risk / Data Science</td></tr>
@@ -124,7 +131,14 @@
     <tr><td>Outcome label</td><td>default flag (90+ DPD within 12m)</td><td>Collections / write-off system</td></tr>
   </table>
 
-  <h2>4. Prototype &amp; Evaluation (MVP)</h2>
+  <h2>4. Data &amp; Process Flow Diagrams</h2>
+  <p>The overall diagram shows how data flows from source systems through the AI scoring model to the approval decision, and the sequence diagram details each step of the interaction between the applicant, the system, and the credit officer.</p>
+  <img class="fig" src="diagrams/p1_flow_en.png" alt="Project 1 data flow diagram">
+  <p class="caption">Figure 2. Data &amp; process flow diagram.</p>
+  <img class="fig" src="diagrams/p1_seq_en.png" alt="Project 1 sequence diagram">
+  <p class="caption">Figure 3. Sequence diagram from application submission to decision.</p>
+
+  <h2>5. Prototype &amp; Evaluation (MVP)</h2>
   <p>Synthetic dataset (8,000 records, ~14.8% base default rate) mirroring the attributes above; baseline logistic regression scoring model built to validate the analytical approach before proposing it to AI Engineering for a production-grade model.</p>
   <table>
     <tr><th>Metric</th><th>Result</th><th>Interpretation</th></tr>
@@ -136,7 +150,7 @@
   <img class="fig" src="score_distribution.png" alt="Score distribution chart">
   <p class="caption">Figure 1. Distribution of predicted default probability, defaulters vs. non-defaulters, with proposed review threshold.</p>
 
-  <h2>5. Limitations &amp; Risks</h2>
+  <h2>6. Limitations &amp; Risks</h2>
   <ul>
     <li>Synthetic data — patterns are illustrative only; must re-validate on real historical data.</li>
     <li>Precision (~29%) suitable for a review queue, not for auto-decline.</li>
@@ -144,7 +158,7 @@
     <li>Explainability preserved via logistic regression for MVP; production model needs SHAP-based explanations.</li>
   </ul>
 
-  <h2>6. KPI / Metrics Framework</h2>
+  <h2>7. KPI / Metrics Framework</h2>
   <table>
     <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
     <tr><td>Model AUC / KS (live)</td><td>Monthly</td><td>Risk / Data Science</td></tr>

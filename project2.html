@@ -60,7 +60,14 @@
     <tr><td>Sản phẩm đang sở hữu</td><td>có tiết kiệm / thẻ tín dụng / đầu tư</td><td>Product Master / CRM</td></tr>
   </table>
 
-  <h2>4. Prototype &amp; Đánh giá (MVP)</h2>
+  <h2>4. Sơ đồ luồng dữ liệu &amp; quy trình</h2>
+  <p>Sơ đồ tổng thể cho thấy dữ liệu đi từ các hệ thống nguồn, qua mô hình phân khúc AI, đến bước BA gán nhãn kinh doanh và Marketing/RM triển khai chiến dịch — và sơ đồ trình tự mô tả cụ thể vai trò từng bên trong quy trình đó.</p>
+  <img class="fig" src="diagrams/p2_flow_vi.png" alt="Sơ đồ luồng dữ liệu Project 2">
+  <p class="caption">Hình 2. Sơ đồ luồng dữ liệu &amp; quy trình xử lý.</p>
+  <img class="fig" src="diagrams/p2_seq_vi.png" alt="Sơ đồ trình tự Project 2">
+  <p class="caption">Hình 3. Sơ đồ trình tự từ phân khúc đến chiến dịch.</p>
+
+  <h2>5. Prototype &amp; Đánh giá (MVP)</h2>
   <p>Bộ dữ liệu giả lập (6.000 khách hàng) được phân cụm bằng K-means (k=4, chuẩn hoá đặc trưng) để kiểm chứng phương pháp ở giai đoạn MVP.</p>
   <table>
     <tr><th>Phân khúc</th><th>Đặc điểm</th><th>% trên tổng</th><th>Hành động đề xuất</th></tr>
@@ -73,7 +80,7 @@
   <p class="caption">Hình 1. Các phân khúc khách hàng theo số dư trung bình và điểm tương tác digital.</p>
   <div class="note">Ghi chú phương pháp: output K-means thô ban đầu chỉ là nhóm thống kê chung; nhãn kinh doanh và hành động đề xuất ở trên là kết quả của bước đối chiếu domain knowledge — đây chính là phần giá trị BA đóng góp trên nền AI Engineering xây dựng.</div>
 
-  <h2>5. Hạn chế &amp; Rủi ro</h2>
+  <h2>6. Hạn chế &amp; Rủi ro</h2>
   <ul>
     <li>Dữ liệu giả lập — cần re-cluster và validate lại với dữ liệu thật cùng Marketing/RM.</li>
     <li>Cụm có thể không ổn định: cần định kỳ re-segmentation (ví dụ theo quý).</li>
@@ -81,7 +88,7 @@
     <li>Cần xác nhận cơ sở consent cho việc sử dụng dữ liệu hành vi trong marketing analytics.</li>
   </ul>
 
-  <h2>6. Khung KPI / Metrics</h2>
+  <h2>7. Khung KPI / Metrics</h2>
   <table>
     <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
     <tr><td>Độ ổn định phân khúc</td><td>Hàng quý</td><td>Đội Data/AI</td></tr>
@@ -125,7 +132,14 @@
     <tr><td>Product holding</td><td>has savings / credit card / investment</td><td>Product Master / CRM</td></tr>
   </table>
 
-  <h2>4. Prototype &amp; Evaluation (MVP)</h2>
+  <h2>4. Data &amp; Process Flow Diagrams</h2>
+  <p>The overall diagram shows how data flows from source systems through the AI segmentation model to the BA business-labeling step and Marketing/RM campaign execution — and the sequence diagram details each party's role in that process.</p>
+  <img class="fig" src="diagrams/p2_flow_en.png" alt="Project 2 data flow diagram">
+  <p class="caption">Figure 2. Data &amp; process flow diagram.</p>
+  <img class="fig" src="diagrams/p2_seq_en.png" alt="Project 2 sequence diagram">
+  <p class="caption">Figure 3. Sequence diagram from segments to campaign.</p>
+
+  <h2>5. Prototype &amp; Evaluation (MVP)</h2>
   <p>Synthetic dataset (6,000 customers) clustered using K-means (k=4, standardized features) to validate the approach as an MVP.</p>
   <table>
     <tr><th>Segment</th><th>Profile</th><th>% of base</th><th>Recommended action</th></tr>
@@ -138,7 +152,7 @@
   <p class="caption">Figure 1. Customer segments plotted by average balance vs. digital engagement score.</p>
   <div class="note">Methodology note: the raw K-means output initially produced only generic statistical clusters; the business labels and recommended actions above come from a step of cross-checking against domain knowledge — this is the core value the BA adds on top of what AI Engineering builds.</div>
 
-  <h2>5. Limitations &amp; Risks</h2>
+  <h2>6. Limitations &amp; Risks</h2>
   <ul>
     <li>Synthetic data — must re-cluster and validate against real data together with Marketing/RM.</li>
     <li>Cluster instability: needs a defined re-segmentation cadence (e.g., quarterly).</li>
@@ -146,7 +160,7 @@
     <li>Must confirm the consent basis for using behavioral data in marketing analytics.</li>
   </ul>
 
-  <h2>6. KPI / Metrics Framework</h2>
+  <h2>7. KPI / Metrics Framework</h2>
   <table>
     <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
     <tr><td>Segment stability</td><td>Quarterly</td><td>Data/AI team</td></tr>

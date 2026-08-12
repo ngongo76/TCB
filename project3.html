@@ -59,7 +59,14 @@
   <p>Các đội CSKH xử lý khối lượng lớn các yêu cầu lặp lại, độ phức tạp thấp (kiểm tra số dư, tra soát giao dịch, hỏi đáp sản phẩm cơ bản) lẫn với các trường hợp phức tạp thật trong cùng một hàng đợi. Điều này làm tăng thời gian xử lý trung bình và kéo thời gian của nhân viên ra khỏi những trường hợp thực sự cần con người xử lý.</p>
   <p><b>Mục tiêu kinh doanh:</b> giảm tải và tăng tốc xử lý các yêu cầu khối lượng lớn, độ phức tạp thấp thông qua trợ lý AI hội thoại, đồng thời đảm bảo các trường hợp nhạy cảm (tra soát, gian lận, khiếu nại) luôn được chuyển cho nhân viên con người kèm đầy đủ ngữ cảnh.</p>
 
-  <h2>2. Prototype tương tác (Vibe Coding demo)</h2>
+  <h2>2. Sơ đồ luồng dữ liệu &amp; quy trình</h2>
+  <p>Sơ đồ tổng thể cho thấy tin nhắn khách hàng được phân loại intent và xử lý theo 2 nhánh (tự động trả lời hoặc escalate cho nhân viên) — và sơ đồ trình tự mô tả cụ thể từng bước tương tác giữa khách hàng, AI, hệ thống, và nhân viên CSKH.</p>
+  <img class="fig" src="diagrams/p3_flow_vi.png" alt="Sơ đồ luồng dữ liệu Project 3">
+  <p class="caption">Hình 1. Sơ đồ luồng dữ liệu &amp; quy trình xử lý.</p>
+  <img class="fig" src="diagrams/p3_seq_vi.png" alt="Sơ đồ trình tự Project 3">
+  <p class="caption">Hình 2. Sơ đồ trình tự từ khi nhận tin nhắn đến khi xử lý xong.</p>
+
+  <h2>3. Prototype tương tác (Vibe Coding demo)</h2>
   <p>Prototype giao diện tĩnh được xây dựng bằng kỹ thuật "vibe coding" hỗ trợ bởi GenAI, nhằm thống nhất UX và luồng hội thoại với các bên liên quan trước khi đầu tư thời gian phát triển. Thử ngay bên dưới — bấm vào gợi ý nhanh hoặc nhập câu hỏi:</p>
 
   <div class="demo-wrap">
@@ -86,14 +93,14 @@
 
   <div class="note">Đây là prototype tĩnh minh họa UX &amp; luồng hội thoại (rule-matching theo từ khóa) — chưa nối LLM/API thật. Mục đích: thống nhất concept với business trước khi AI Engineering build hệ thống production (LLM + RAG trên nội dung chính sách được Compliance phê duyệt).</div>
 
-  <h2>3. Hạn chế &amp; Rủi ro</h2>
+  <h2>4. Hạn chế &amp; Rủi ro</h2>
   <ul>
     <li>Chưa có mô hình ngôn ngữ thật — chỉ minh hoạ luồng/UX; độ chính xác, hallucination, độ trễ cần được đánh giá riêng khi tích hợp mô hình thật.</li>
     <li>Rủi ro hallucination: bản production phải grounding câu trả lời chính sách bằng RAG trên nội dung đã được Compliance phê duyệt.</li>
     <li>Quy tắc escalation cần được Risk/Compliance/lãnh đạo CSKH rà soát kỹ — thiếu một trigger escalation (ví dụ liên quan gian lận) là rủi ro ảnh hưởng đến khách hàng thật, không chỉ là một thiếu sót về UX.</li>
   </ul>
 
-  <h2>4. Khung KPI / Metrics</h2>
+  <h2>5. Khung KPI / Metrics</h2>
   <table>
     <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
     <tr><td>Tỷ lệ containment / giảm tải</td><td>Hàng tuần</td><td>CSKH Ops</td></tr>
@@ -116,7 +123,14 @@
   <p>CSKH teams handle a high volume of repetitive, low-complexity requests (balance checks, transaction lookups, basic product inquiries) mixed with genuinely complex cases in the same queue. This inflates average handling time and pulls agent time away from cases that truly need a human.</p>
   <p><b>Business objective:</b> deflect and speed up resolution of high-volume, low-complexity requests via a conversational AI assistant, while ensuring sensitive cases (disputes, fraud, complaints) are always escalated to a human with full context.</p>
 
-  <h2>2. Interactive Prototype (Vibe Coding demo)</h2>
+  <h2>2. Data &amp; Process Flow Diagrams</h2>
+  <p>The overall diagram shows how a customer message is classified by intent and routed down one of two branches (automated grounded reply or escalation to an agent) — and the sequence diagram details the step-by-step interaction between the customer, the AI assistant, the backend systems, and the human CSKH agent.</p>
+  <img class="fig" src="diagrams/p3_flow_en.png" alt="Project 3 data flow diagram">
+  <p class="caption">Figure 1. Data &amp; process flow diagram.</p>
+  <img class="fig" src="diagrams/p3_seq_en.png" alt="Project 3 sequence diagram">
+  <p class="caption">Figure 2. Sequence diagram from message receipt to resolution.</p>
+
+  <h2>3. Interactive Prototype (Vibe Coding demo)</h2>
   <p>Static front-end prototype built with GenAI-assisted "vibe coding" to align UX and conversational flow with stakeholders before committing engineering time. Try it below — click a quick-reply chip or type a question:</p>
 
   <div class="demo-wrap">
@@ -143,14 +157,14 @@
 
   <div class="note">This is a static prototype illustrating UX and conversation flow (keyword rule-matching) — not yet connected to a real LLM/API. Purpose: align on the concept with the business before AI Engineering builds the production system (LLM + RAG over policy content approved by Compliance).</div>
 
-  <h2>3. Limitations &amp; Risks</h2>
+  <h2>4. Limitations &amp; Risks</h2>
   <ul>
     <li>No real language model yet — this only illustrates flow/UX; accuracy, hallucination, and latency need separate evaluation once a real model is integrated.</li>
     <li>Hallucination risk: the production version must ground policy answers using RAG over content approved by Compliance.</li>
     <li>The escalation rule set needs careful review by Risk/Compliance/CSKH leadership — missing one escalation trigger (e.g., fraud-related) is a real customer-impact risk, not just a UX gap.</li>
   </ul>
 
-  <h2>4. KPI / Metrics Framework</h2>
+  <h2>5. KPI / Metrics Framework</h2>
   <table>
     <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
     <tr><td>Containment / deflection rate</td><td>Weekly</td><td>CSKH Ops</td></tr>
