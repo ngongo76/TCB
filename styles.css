@@ -15,6 +15,12 @@ nav a:hover{opacity:1; text-decoration:underline;}
 .lang-switch button{background:transparent; border:1px solid rgba(255,255,255,.35); color:#fff; font-size:11px; font-weight:600; padding:4px 11px; border-radius:14px; cursor:pointer; opacity:.7;}
 .lang-switch button:hover{opacity:1;}
 .lang-switch button.active{background:var(--primary); border-color:var(--primary); opacity:1;}
+.headrow-right{display:flex; align-items:center; gap:16px;}
+.author-link{display:flex; align-items:center; gap:6px; color:#fff; opacity:.8; font-size:12.5px; font-weight:600; text-decoration:none;}
+.author-link:hover{opacity:1; text-decoration:underline;}
+.author-link svg{width:15px; height:15px; fill:#fff;}
+footer .li-link{color:var(--primary); font-weight:600; text-decoration:none;}
+footer .li-link:hover{text-decoration:underline;}
 [data-lang][hidden]{display:none !important;}
 main{max-width:900px; margin:0 auto; padding:40px 5vw 80px;}
 h1{font-size:30px; margin-bottom:4px;}
