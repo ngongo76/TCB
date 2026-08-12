@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Project 1 — Credit Risk Scoring | TCB AI Portfolio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <a href="index.html" class="brand">TCB<span> AI Portfolio</span></a>
+    <div class="lang-switch">
+      <button data-set-lang="vi">VI</button>
+      <button data-set-lang="en">EN</button>
+    </div>
+  </div>
+  <nav data-lang="vi">
+    <a href="index.html">Tổng quan</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+  <nav data-lang="en" hidden>
+    <a href="index.html">Overview</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+</header>
+<main>
+
+<div data-lang="vi">
+  <div class="badge">PROJECT 1 · RISK &amp; GOVERNANCE</div>
+  <h1>Chấm điểm rủi ro vỡ nợ tín dụng &amp; gian lận bằng AI</h1>
+  <p class="subtitle">Bản demo portfolio — Business Data Analyst (AI Products) | Thực hiện bởi Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project1_Credit_Risk_Case_Study.docx">Tải case study đầy đủ (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Về tổng quan</a>
+  </div>
+
+  <h2>1. Bối cảnh kinh doanh &amp; Vấn đề cần giải quyết</h2>
+  <p>Các đội tín dụng bán lẻ/cá nhân phê duyệt vay tiêu dùng và thẻ tín dụng một phần dựa trên kiểm tra tín dụng thủ công và điểm số bureau tĩnh, vốn chậm thích ứng với các mẫu rủi ro mới phát sinh. Điều này tạo ra hai loại chi phí: phê duyệt các khoản vay sau đó vỡ nợ, và từ chối hoặc làm chậm quá trình xét duyệt cho khách hàng đủ điều kiện vì nhân viên thẩm định thiếu một tín hiệu rủi ro nhất quán, dựa trên dữ liệu.</p>
+  <p><b>Mục tiêu kinh doanh:</b> giảm tổn thất do vỡ nợ trên các khoản vay không có tài sản đảm bảo, trong khi vẫn giữ khối lượng công việc rà soát thủ công ở mức quản lý được, không tạo ra các quyết định thiếu công bằng hoặc không thể giải thích.</p>
+
+  <h2>2. Giả thuyết phân tích &amp; Tiêu chí thành công</h2>
+  <ul>
+    <li>Giả thuyết: một mô hình chấm điểm dựa trên hồ sơ hành vi/tài chính (tỷ lệ sử dụng hạn mức, DTI, lịch sử thanh toán, thời gian gắn bó, thu nhập) có thể xếp hạng rủi ro vỡ nợ tốt hơn các quy tắc bureau tĩnh.</li>
+    <li>Tiêu chí thành công (kinh doanh): giảm tỷ lệ vỡ nợ trong danh mục đã phê duyệt, không làm tăng tỷ lệ từ chối vượt ngưỡng đã thống nhất.</li>
+    <li>Tiêu chí thành công (phân tích): AUC cao hơn đáng kể so với baseline ngẫu nhiên (0.5); recall/precision được tính toán phù hợp với năng lực rà soát của bộ phận tín dụng.</li>
+    <li>Ngoài phạm vi: tự động hoá phê duyệt/từ chối cuối cùng — output chỉ là công cụ hỗ trợ quyết định, nhân viên tín dụng vẫn giữ quyền quyết định cuối cùng.</li>
+  </ul>
+
+  <h2>3. Yêu cầu dữ liệu</h2>
+  <table>
+    <tr><th>Thực thể dữ liệu</th><th>Thuộc tính chính</th><th>Hệ thống nguồn</th></tr>
+    <tr><td>Hồ sơ khách hàng</td><td>tuổi, thu nhập, thời gian gắn bó, phân khúc nghề nghiệp</td><td>Core Banking / CRM</td></tr>
+    <tr><td>Dữ liệu bureau tín dụng</td><td>điểm số bên ngoài, khoản vay hiện có, lịch sử nợ quá hạn trước đó</td><td>Bureau feed (batch)</td></tr>
+    <tr><td>Hành vi tài khoản</td><td>tỷ lệ sử dụng hạn mức, số dư, giao dịch trung bình</td><td>Hệ thống quản lý thẻ/vay</td></tr>
+    <tr><td>Lịch sử thanh toán</td><td>thanh toán trễ (12 tháng), trả góp bị bỏ lỡ</td><td>Quản lý khoản vay / thu hồi nợ</td></tr>
+    <tr><td>Nhãn kết quả</td><td>cờ vỡ nợ (quá hạn 90+ ngày trong 12 tháng)</td><td>Hệ thống thu hồi nợ / xóa nợ</td></tr>
+  </table>
+
+  <h2>4. Prototype &amp; Đánh giá (MVP)</h2>
+  <p>Bộ dữ liệu giả lập (8.000 bản ghi, tỷ lệ vỡ nợ cơ sở ~14.8%) mô phỏng các thuộc tính trên; mô hình hồi quy logistic cơ bản được xây dựng để kiểm chứng phương pháp phân tích trước khi đề xuất cho AI Engineering xây mô hình cấp production.</p>
+  <table>
+    <tr><th>Chỉ số</th><th>Kết quả</th><th>Diễn giải</th></tr>
+    <tr><td>AUC (tập kiểm tra)</td><td>0.674</td><td>Xếp hạng rủi ro tốt hơn đáng kể so với ngẫu nhiên; baseline cho MVP</td></tr>
+    <tr><td>Ngưỡng rà soát</td><td>Top 15% điểm số cao nhất</td><td>Được tính toán phù hợp với năng lực rà soát của bộ phận tín dụng</td></tr>
+    <tr><td>Precision (nhóm được đánh dấu)</td><td>0.29</td><td>~29% các trường hợp được đánh dấu là vỡ nợ thật</td></tr>
+    <tr><td>Recall (nhóm được đánh dấu)</td><td>0.294</td><td>~29% các trường hợp vỡ nợ thật được phát hiện ở ngưỡng này</td></tr>
+  </table>
+  <img class="fig" src="score_distribution.png" alt="Biểu đồ phân bố điểm rủi ro">
+  <p class="caption">Hình 1. Phân bố xác suất vỡ nợ dự đoán, giữa nhóm vỡ nợ và không vỡ nợ, kèm ngưỡng rà soát đề xuất.</p>
+
+  <h2>5. Hạn chế &amp; Rủi ro</h2>
+  <ul>
+    <li>Dữ liệu giả lập — các mẫu hình chỉ mang tính minh họa; cần re-validate trên dữ liệu lịch sử thật.</li>
+    <li>Precision (~29%) phù hợp cho hàng đợi rà soát thủ công, không phù hợp để tự động từ chối.</li>
+    <li>Cần được Model Risk Management thẩm định độc lập trước khi đưa vào production.</li>
+    <li>Khả năng giải thích được giữ nguyên nhờ dùng hồi quy logistic cho MVP; mô hình production cần giải thích dựa trên SHAP.</li>
+  </ul>
+
+  <h2>6. Khung KPI / Metrics</h2>
+  <table>
+    <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
+    <tr><td>AUC / KS mô hình (thực tế)</td><td>Hàng tháng</td><td>Risk / Data Science</td></tr>
+    <tr><td>Tỷ lệ vỡ nợ thực tế vs. dự đoán</td><td>Hàng tháng</td><td>Risk</td></tr>
+    <tr><td>Precision hàng đợi rà soát</td><td>Hàng tháng</td><td>Credit Ops</td></tr>
+    <tr><td>Tỷ lệ override của nhân viên tín dụng</td><td>Hàng tháng</td><td>Credit Ops</td></tr>
+    <tr><td>Kiểm tra công bằng/bias</td><td>Hàng quý</td><td>Risk &amp; Compliance</td></tr>
+  </table>
+
+  <div class="note">Toàn bộ số liệu trong project này là dữ liệu giả lập (synthetic), phục vụ minh họa phương pháp — không phải dữ liệu khách hàng thật.</div>
+</div>
+
+<div data-lang="en" hidden>
+  <div class="badge">PROJECT 1 · RISK &amp; GOVERNANCE</div>
+  <h1>AI-based Credit Default &amp; Fraud Risk Scoring</h1>
+  <p class="subtitle">Portfolio demo — Business Data Analyst (AI Products) | Prepared by Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project1_Credit_Risk_Case_Study.docx">Download full case study (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Back to overview</a>
+  </div>
+
+  <h2>1. Business Context &amp; Problem Statement</h2>
+  <p>Retail/consumer lending teams approve personal loans and credit cards partly on manual credit checks and static bureau scores, which are slow to adapt to emerging risk patterns. This creates two costs: approving loans that later default, and rejecting or slow-walking creditworthy customers because reviewers lack a consistent, data-driven risk signal.</p>
+  <p><b>Business objective:</b> reduce default losses on unsecured lending while keeping manual-review workload manageable, without introducing unfair or non-explainable decisions.</p>
+
+  <h2>2. Analytical Hypothesis &amp; Success Criteria</h2>
+  <ul>
+    <li>Hypothesis: a behavioral/financial-profile scoring model (utilization, DTI, payment history, tenure, income) can rank-order default risk better than static bureau-only rules.</li>
+    <li>Success criteria (business): reduce default rate within the approved book, without increasing rejection rate beyond an agreed ceiling.</li>
+    <li>Success criteria (analytical): AUC materially above random baseline (0.5); recall/precision sized to credit ops' review capacity.</li>
+    <li>Out of scope: final approve/reject automation — output is decision-support, human officer retains final call.</li>
+  </ul>
+
+  <h2>3. Data Requirements</h2>
+  <table>
+    <tr><th>Entity</th><th>Key attributes</th><th>Source system</th></tr>
+    <tr><td>Customer profile</td><td>age, income, tenure, employment segment</td><td>Core Banking / CRM</td></tr>
+    <tr><td>Credit bureau data</td><td>external score, existing loans, prior delinquency</td><td>Bureau feed (batch)</td></tr>
+    <tr><td>Account behavior</td><td>credit utilization, balances, avg transactions</td><td>Card/Loan servicing</td></tr>
+    <tr><td>Payment history</td><td>late payments (12m), missed installments</td><td>Loan servicing / collections</td></tr>
+    <tr><td>Outcome label</td><td>default flag (90+ DPD within 12m)</td><td>Collections / write-off system</td></tr>
+  </table>
+
+  <h2>4. Prototype &amp; Evaluation (MVP)</h2>
+  <p>Synthetic dataset (8,000 records, ~14.8% base default rate) mirroring the attributes above; baseline logistic regression scoring model built to validate the analytical approach before proposing it to AI Engineering for a production-grade model.</p>
+  <table>
+    <tr><th>Metric</th><th>Result</th><th>Interpretation</th></tr>
+    <tr><td>AUC (test set)</td><td>0.674</td><td>Ranks risk meaningfully better than random; MVP baseline</td></tr>
+    <tr><td>Review threshold</td><td>Top 15% of scores</td><td>Sized to match credit ops' review capacity</td></tr>
+    <tr><td>Precision (flagged)</td><td>0.29</td><td>~29% of flagged cases are true defaulters</td></tr>
+    <tr><td>Recall (flagged)</td><td>0.294</td><td>~29% of actual defaulters caught at this threshold</td></tr>
+  </table>
+  <img class="fig" src="score_distribution.png" alt="Score distribution chart">
+  <p class="caption">Figure 1. Distribution of predicted default probability, defaulters vs. non-defaulters, with proposed review threshold.</p>
+
+  <h2>5. Limitations &amp; Risks</h2>
+  <ul>
+    <li>Synthetic data — patterns are illustrative only; must re-validate on real historical data.</li>
+    <li>Precision (~29%) suitable for a review queue, not for auto-decline.</li>
+    <li>Requires independent Model Risk Management validation before production use.</li>
+    <li>Explainability preserved via logistic regression for MVP; production model needs SHAP-based explanations.</li>
+  </ul>
+
+  <h2>6. KPI / Metrics Framework</h2>
+  <table>
+    <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
+    <tr><td>Model AUC / KS (live)</td><td>Monthly</td><td>Risk / Data Science</td></tr>
+    <tr><td>Actual vs. predicted default rate</td><td>Monthly</td><td>Risk</td></tr>
+    <tr><td>Review queue precision</td><td>Monthly</td><td>Credit Ops</td></tr>
+    <tr><td>Officer override rate</td><td>Monthly</td><td>Credit Ops</td></tr>
+    <tr><td>Fairness/bias check</td><td>Quarterly</td><td>Risk &amp; Compliance</td></tr>
+  </table>
+
+  <div class="note">All figures in this project are synthetic data used for methodology illustration only — not real customer data.</div>
+</div>
+
+</main>
+<script src="lang.js"></script>
+</body>
+</html>

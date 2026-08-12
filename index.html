@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>TCB AI Product Portfolio — Kevin Ngo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <a href="index.html" class="brand">TCB<span> AI Portfolio</span></a>
+    <div class="lang-switch">
+      <button data-set-lang="vi">VI</button>
+      <button data-set-lang="en">EN</button>
+    </div>
+  </div>
+  <nav data-lang="vi">
+    <a href="index.html">Tổng quan</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+  <nav data-lang="en" hidden>
+    <a href="index.html">Overview</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+</header>
+<main>
+
+<div data-lang="vi">
+  <div class="badge">BẢN DEMO PORTFOLIO</div>
+  <h1>Case Study Sản phẩm AI — Business Data Analyst (AI Products)</h1>
+  <p class="subtitle">Chuẩn bị cho vị trí Business Data Analyst (AI Products) tại Techcombank — Thực hiện bởi Kevin Ngo</p>
+
+  <div class="card">
+    <p>Ba case study dưới đây mô phỏng đúng vòng đời một AI product theo JD: từ phân tích business problem, đặt hypothesis, xác định data requirements, xây prototype/MVP, đánh giá kết quả, đến khung KPI theo dõi sau triển khai và kế hoạch bàn giao cho các bên liên quan (AI Engineering, Risk/Compliance, Business).</p>
+    <p style="margin-bottom:0">Mỗi project đều tách rõ ranh giới: <b>Business Data Analyst sở hữu business logic, threshold, và orchestration requirements</b> — còn <b>AI Engineering sở hữu architecture và scalability</b>, đúng như JD mô tả.</p>
+  </div>
+
+  <div class="cards">
+    <a class="proj-card" href="project1.html">
+      <div class="tag">Risk &amp; Governance</div>
+      <h3>1. Credit Default &amp; Fraud Risk Scoring</h3>
+      <p>Mô hình chấm điểm rủi ro tín dụng, đánh giá AUC/precision/recall, và khung KPI giám sát mô hình sau triển khai.</p>
+    </a>
+    <a class="proj-card" href="project2.html">
+      <div class="tag">Marketing &amp; CRM</div>
+      <h3>2. Customer Segmentation &amp; Cross-sell</h3>
+      <p>Phân khúc khách hàng bằng clustering, diễn giải kinh doanh trên output AI, và đề xuất chiến lược cross-sell theo từng nhóm.</p>
+    </a>
+    <a class="proj-card" href="project3.html">
+      <div class="tag">GenAI Prototyping</div>
+      <h3>3. GenAI Customer Service Assistant</h3>
+      <p>Prototype tương tác trợ lý AI CSKH dựng bằng Vibe Coding, minh họa luồng hội thoại và cơ chế escalation.</p>
+    </a>
+  </div>
+</div>
+
+<div data-lang="en" hidden>
+  <div class="badge">PORTFOLIO DEMO</div>
+  <h1>AI Product Case Studies — Business Data Analyst (AI Products)</h1>
+  <p class="subtitle">Prepared for the Business Data Analyst (AI Products) role at Techcombank — by Kevin Ngo</p>
+
+  <div class="card">
+    <p>The three case studies below follow the full lifecycle of an AI product as described in the job description: analyzing the business problem, framing a hypothesis, defining data requirements, building a prototype/MVP, evaluating results, and setting up a KPI framework and handover plan for stakeholders (AI Engineering, Risk/Compliance, Business).</p>
+    <p style="margin-bottom:0">Each project draws a clear boundary: the <b>Business Data Analyst owns business logic, thresholds, and orchestration requirements</b> — while <b>AI Engineering owns architecture and scalability</b>, exactly as described in the job description.</p>
+  </div>
+
+  <div class="cards">
+    <a class="proj-card" href="project1.html">
+      <div class="tag">Risk &amp; Governance</div>
+      <h3>1. Credit Default &amp; Fraud Risk Scoring</h3>
+      <p>A credit risk scoring model with AUC/precision/recall evaluation, and a KPI framework for monitoring the model after deployment.</p>
+    </a>
+    <a class="proj-card" href="project2.html">
+      <div class="tag">Marketing &amp; CRM</div>
+      <h3>2. Customer Segmentation &amp; Cross-sell</h3>
+      <p>Customer segmentation via clustering, business interpretation of the AI output, and a cross-sell strategy tailored to each segment.</p>
+    </a>
+    <a class="proj-card" href="project3.html">
+      <div class="tag">GenAI Prototyping</div>
+      <h3>3. GenAI Customer Service Assistant</h3>
+      <p>An interactive AI customer-service assistant prototype built with vibe coding, demonstrating the conversation flow and escalation logic.</p>
+    </a>
+  </div>
+</div>
+
+</main>
+<script src="lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Project 2 — Customer Segmentation | TCB AI Portfolio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <a href="index.html" class="brand">TCB<span> AI Portfolio</span></a>
+    <div class="lang-switch">
+      <button data-set-lang="vi">VI</button>
+      <button data-set-lang="en">EN</button>
+    </div>
+  </div>
+  <nav data-lang="vi">
+    <a href="index.html">Tổng quan</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+  <nav data-lang="en" hidden>
+    <a href="index.html">Overview</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+</header>
+<main>
+
+<div data-lang="vi">
+  <div class="badge">PROJECT 2 · MARKETING &amp; CRM</div>
+  <h1>Phân khúc khách hàng &amp; Nhắm mục tiêu Cross-sell bằng AI</h1>
+  <p class="subtitle">Bản demo portfolio — Business Data Analyst (AI Products) | Thực hiện bởi Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project2_Customer_Segmentation_Case_Study.docx">Tải case study đầy đủ (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Về tổng quan</a>
+  </div>
+
+  <h2>1. Bối cảnh kinh doanh &amp; Vấn đề cần giải quyết</h2>
+  <p>Các đội Marketing/RM chạy chiến dịch cross-sell dựa trên các quy tắc phân khúc theo nhân khẩu học rộng, không phản ánh đúng hành vi thực tế. Điều này dẫn đến các ưu đãi chung được gửi sai đối tượng — khách hàng giàu nhưng chưa được chăm sóc đúng mức nhận quảng cáo vay đại trà, trong khi khách hàng năng động trên digital, dễ chuyển đổi sang thẻ tín dụng lại không nhận được gì.</p>
+  <p><b>Mục tiêu kinh doanh:</b> nhóm khách hàng thành các phân khúc hành vi riêng biệt để Marketing/RM có thể nhắm đến từng nhóm bằng ưu đãi sản phẩm phù hợp nhất (next-best-product).</p>
+
+  <h2>2. Giả thuyết phân tích &amp; Tiêu chí thành công</h2>
+  <ul>
+    <li>Giả thuyết: khách hàng phân thành các nhóm hành vi có thể phân biệt được dựa trên số dư, mức độ tương tác digital, độ sâu sản phẩm, và thời gian gắn bó — tương ứng với các chiến lược cross-sell khác nhau, có thể hành động được.</li>
+    <li>Tiêu chí thành công (kinh doanh): mỗi phân khúc phải đủ lớn để triển khai chiến dịch riêng, gắn với một ưu đãi cụ thể, và được Marketing/RM xác nhận.</li>
+    <li>Tiêu chí thành công (phân tích): các cụm phân biệt được về hành vi và ổn định trong ít nhất một chu kỳ chiến dịch.</li>
+    <li>Ngoài phạm vi: chấm điểm propensity ở cấp độ cá nhân — kết quả này chỉ định hướng chiến lược nhắm mục tiêu ở cấp độ phân khúc.</li>
+  </ul>
+
+  <h2>3. Yêu cầu dữ liệu</h2>
+  <table>
+    <tr><th>Thực thể dữ liệu</th><th>Thuộc tính chính</th><th>Hệ thống nguồn</th></tr>
+    <tr><td>Thông tin nhân khẩu học khách hàng</td><td>tuổi, thời gian gắn bó với ngân hàng</td><td>Core Banking / CRM</td></tr>
+    <tr><td>Số dư tài khoản</td><td>số dư trung bình hàng tháng</td><td>Core Banking (deposit ledger)</td></tr>
+    <tr><td>Tương tác digital</td><td>điểm hoạt động trên app di động</td><td>Log nền tảng digital banking</td></tr>
+    <tr><td>Hành vi giao dịch</td><td>số giao dịch trung bình mỗi tháng</td><td>Hệ thống xử lý thẻ/thanh toán</td></tr>
+    <tr><td>Sản phẩm đang sở hữu</td><td>có tiết kiệm / thẻ tín dụng / đầu tư</td><td>Product Master / CRM</td></tr>
+  </table>
+
+  <h2>4. Prototype &amp; Đánh giá (MVP)</h2>
+  <p>Bộ dữ liệu giả lập (6.000 khách hàng) được phân cụm bằng K-means (k=4, chuẩn hoá đặc trưng) để kiểm chứng phương pháp ở giai đoạn MVP.</p>
+  <table>
+    <tr><th>Phân khúc</th><th>Đặc điểm</th><th>% trên tổng</th><th>Hành động đề xuất</th></tr>
+    <tr><td>A — Khách hàng mới, giàu có</td><td>Số dư cao nhất (~52 triệu), thời gian gắn bó ngắn (~3 năm), tỷ lệ nắm giữ đầu tư thấp</td><td>4.4%</td><td>Ưu tiên tư vấn wealth/đầu tư</td></tr>
+    <tr><td>B — Khách hàng lâu năm, ổn định</td><td>Số dư trung bình, thời gian gắn bó dài nhất (~10 năm), tỷ lệ nắm giữ đầu tư thấp</td><td>14.6%</td><td>Đào sâu quan hệ qua RM</td></tr>
+    <tr><td>C — Khách hàng digital lâu năm</td><td>Lớn tuổi hơn (~46), hoạt động digital cao, độ sâu sản phẩm mỏng</td><td>37.9%</td><td>Cross-sell thẻ tín dụng / vay tiêu dùng qua ưu đãi trên app</td></tr>
+    <tr><td>D — Khách hàng trẻ, ưu tiên digital</td><td>Trẻ nhất (~27), hoạt động digital cao, độ sâu sản phẩm mỏng</td><td>43.2%</td><td>Thẻ tín dụng cấp cơ bản + tính năng mục tiêu tiết kiệm</td></tr>
+  </table>
+  <img class="fig" src="segment_scatter.png" alt="Biểu đồ phân khúc khách hàng">
+  <p class="caption">Hình 1. Các phân khúc khách hàng theo số dư trung bình và điểm tương tác digital.</p>
+  <div class="note">Ghi chú phương pháp: output K-means thô ban đầu chỉ là nhóm thống kê chung; nhãn kinh doanh và hành động đề xuất ở trên là kết quả của bước đối chiếu domain knowledge — đây chính là phần giá trị BA đóng góp trên nền AI Engineering xây dựng.</div>
+
+  <h2>5. Hạn chế &amp; Rủi ro</h2>
+  <ul>
+    <li>Dữ liệu giả lập — cần re-cluster và validate lại với dữ liệu thật cùng Marketing/RM.</li>
+    <li>Cụm có thể không ổn định: cần định kỳ re-segmentation (ví dụ theo quý).</li>
+    <li>Rủi ro về công bằng: cần kiểm tra để không bỏ sót nhóm khách hàng ít hoạt động digital/số dư thấp.</li>
+    <li>Cần xác nhận cơ sở consent cho việc sử dụng dữ liệu hành vi trong marketing analytics.</li>
+  </ul>
+
+  <h2>6. Khung KPI / Metrics</h2>
+  <table>
+    <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
+    <tr><td>Độ ổn định phân khúc</td><td>Hàng quý</td><td>Đội Data/AI</td></tr>
+    <tr><td>Tỷ lệ chuyển đổi chiến dịch theo phân khúc</td><td>Theo từng chiến dịch</td><td>Marketing</td></tr>
+    <tr><td>Độ sâu sản phẩm cross-sell</td><td>Hàng quý</td><td>Business/Product</td></tr>
+    <tr><td>Tỷ lệ opt-out / khiếu nại</td><td>Theo từng chiến dịch</td><td>Marketing/CX</td></tr>
+    <tr><td>Tăng trưởng doanh thu</td><td>Hàng quý</td><td>Business/Finance</td></tr>
+  </table>
+
+  <div class="note">Toàn bộ số liệu trong project này là dữ liệu giả lập (synthetic), phục vụ minh họa phương pháp — không phải dữ liệu khách hàng thật.</div>
+</div>
+
+<div data-lang="en" hidden>
+  <div class="badge">PROJECT 2 · MARKETING &amp; CRM</div>
+  <h1>AI-driven Customer Segmentation &amp; Cross-sell Targeting</h1>
+  <p class="subtitle">Portfolio demo — Business Data Analyst (AI Products) | Prepared by Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project2_Customer_Segmentation_Case_Study.docx">Download full case study (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Back to overview</a>
+  </div>
+
+  <h2>1. Business Context &amp; Problem Statement</h2>
+  <p>Marketing/RM teams run cross-sell campaigns using broad demographic rules that don't capture actual behavior. This leads to generic offers sent to the wrong customers — wealthy but under-served customers get mass-market loan ads, while digitally active customers who'd convert well on a credit card get nothing.</p>
+  <p><b>Business objective:</b> group the customer base into behaviorally distinct segments so Marketing/RM can target each with a relevant next-best-product offer.</p>
+
+  <h2>2. Analytical Hypothesis &amp; Success Criteria</h2>
+  <ul>
+    <li>Hypothesis: customers cluster into distinguishable behavioral groups based on balance, digital engagement, product depth, and tenure — mapping to different, actionable cross-sell strategies.</li>
+    <li>Success criteria (business): each segment must be large enough to justify a campaign, mapped to a specific offer, and validated by Marketing/RM.</li>
+    <li>Success criteria (analytical): clusters behaviorally separable and stable across at least one campaign cycle.</li>
+    <li>Out of scope: individual-level propensity scoring — this informs segment-level targeting strategy only.</li>
+  </ul>
+
+  <h2>3. Data Requirements</h2>
+  <table>
+    <tr><th>Entity</th><th>Key attributes</th><th>Source system</th></tr>
+    <tr><td>Customer demographics</td><td>age, tenure with bank</td><td>Core Banking / CRM</td></tr>
+    <tr><td>Account balances</td><td>average monthly balance</td><td>Core Banking (deposit ledger)</td></tr>
+    <tr><td>Digital engagement</td><td>mobile app activity score</td><td>Digital banking platform logs</td></tr>
+    <tr><td>Transaction behavior</td><td>avg. transactions per month</td><td>Card/Payments processing</td></tr>
+    <tr><td>Product holding</td><td>has savings / credit card / investment</td><td>Product Master / CRM</td></tr>
+  </table>
+
+  <h2>4. Prototype &amp; Evaluation (MVP)</h2>
+  <p>Synthetic dataset (6,000 customers) clustered using K-means (k=4, standardized features) to validate the approach as an MVP.</p>
+  <table>
+    <tr><th>Segment</th><th>Profile</th><th>% of base</th><th>Recommended action</th></tr>
+    <tr><td>A — Affluent newcomer</td><td>Highest balance (~52M), short tenure (~3y), low investment holding</td><td>4.4%</td><td>Priority wealth/investment advisory</td></tr>
+    <tr><td>B — Stable long-tenure</td><td>Moderate balance, longest tenure (~10y), low investment holding</td><td>14.6%</td><td>Relationship deepening via RM</td></tr>
+    <tr><td>C — Established digital user</td><td>Older (~46y), high digital activity, thin product depth</td><td>37.9%</td><td>Credit card / personal loan via app offers</td></tr>
+    <tr><td>D — Young digital-first</td><td>Youngest (~27y), high digital activity, thin product depth</td><td>43.2%</td><td>Entry-level credit card + savings-goal features</td></tr>
+  </table>
+  <img class="fig" src="segment_scatter.png" alt="Segment scatter chart">
+  <p class="caption">Figure 1. Customer segments plotted by average balance vs. digital engagement score.</p>
+  <div class="note">Methodology note: the raw K-means output initially produced only generic statistical clusters; the business labels and recommended actions above come from a step of cross-checking against domain knowledge — this is the core value the BA adds on top of what AI Engineering builds.</div>
+
+  <h2>5. Limitations &amp; Risks</h2>
+  <ul>
+    <li>Synthetic data — must re-cluster and validate against real data together with Marketing/RM.</li>
+    <li>Cluster instability: needs a defined re-segmentation cadence (e.g., quarterly).</li>
+    <li>Fairness risk: needs a check to avoid overlooking lower-balance/less digitally active customers.</li>
+    <li>Must confirm the consent basis for using behavioral data in marketing analytics.</li>
+  </ul>
+
+  <h2>6. KPI / Metrics Framework</h2>
+  <table>
+    <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
+    <tr><td>Segment stability</td><td>Quarterly</td><td>Data/AI team</td></tr>
+    <tr><td>Campaign conversion rate by segment</td><td>Per campaign</td><td>Marketing</td></tr>
+    <tr><td>Cross-sell product depth</td><td>Quarterly</td><td>Business/Product</td></tr>
+    <tr><td>Opt-out / complaint rate</td><td>Per campaign</td><td>Marketing/CX</td></tr>
+    <tr><td>Revenue uplift</td><td>Quarterly</td><td>Business/Finance</td></tr>
+  </table>
+
+  <div class="note">All figures in this project are synthetic data used for methodology illustration only — not real customer data.</div>
+</div>
+
+</main>
+<script src="lang.js"></script>
+</body>
+</html>

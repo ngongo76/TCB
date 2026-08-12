@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Project 3 — GenAI Chatbot | TCB AI Portfolio</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .demo-wrap{display:flex; justify-content:center; margin:24px 0;}
+  .chatapp{width:400px; background:#fff; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,.12); overflow:hidden;}
+  .chatapp .chheader{background:#e2001a; color:#fff; padding:14px 18px;}
+  .chatapp .chheader h4{margin:0; font-size:15px;}
+  .chatapp .chheader p{margin:4px 0 0; font-size:11px; opacity:.85;}
+  .chatbody{height:380px; overflow-y:auto; padding:14px; background:#f9f9fb; display:flex; flex-direction:column; gap:8px;}
+  .bmsg{max-width:78%; padding:9px 13px; border-radius:14px; font-size:13px; line-height:1.4;}
+  .bot{background:#fff; border:1px solid #eee; align-self:flex-start;}
+  .user{background:#e2001a; color:#fff; align-self:flex-end;}
+  .qrow{display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 10px;}
+  .chip{background:#fff; border:1px solid #ddd; border-radius:16px; padding:5px 11px; font-size:11px; cursor:pointer;}
+  .chip:hover{background:#f0f0f0;}
+  .ibar{display:flex; border-top:1px solid #eee; padding:8px;}
+  .ibar input{flex:1; border:none; outline:none; padding:9px; font-size:13px;}
+  .ibar button{background:#e2001a; color:#fff; border:none; border-radius:8px; padding:0 14px; cursor:pointer;}
+</style>
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <a href="index.html" class="brand">TCB<span> AI Portfolio</span></a>
+    <div class="lang-switch">
+      <button data-set-lang="vi">VI</button>
+      <button data-set-lang="en">EN</button>
+    </div>
+  </div>
+  <nav data-lang="vi">
+    <a href="index.html">Tổng quan</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+  <nav data-lang="en" hidden>
+    <a href="index.html">Overview</a>
+    <a href="project1.html">Credit Risk</a>
+    <a href="project2.html">Segmentation</a>
+    <a href="project3.html">Chatbot</a>
+  </nav>
+</header>
+<main>
+
+<div data-lang="vi">
+  <div class="badge">PROJECT 3 · GENAI PROTOTYPING</div>
+  <h1>Trợ lý AI Chăm sóc Khách hàng (Chatbot) bằng GenAI</h1>
+  <p class="subtitle">Bản demo portfolio — Business Data Analyst (AI Products) | Thực hiện bởi Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project3_Chatbot_Case_Study.docx">Tải case study đầy đủ (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Về tổng quan</a>
+  </div>
+
+  <h2>1. Bối cảnh kinh doanh &amp; Vấn đề cần giải quyết</h2>
+  <p>Các đội CSKH xử lý khối lượng lớn các yêu cầu lặp lại, độ phức tạp thấp (kiểm tra số dư, tra soát giao dịch, hỏi đáp sản phẩm cơ bản) lẫn với các trường hợp phức tạp thật trong cùng một hàng đợi. Điều này làm tăng thời gian xử lý trung bình và kéo thời gian của nhân viên ra khỏi những trường hợp thực sự cần con người xử lý.</p>
+  <p><b>Mục tiêu kinh doanh:</b> giảm tải và tăng tốc xử lý các yêu cầu khối lượng lớn, độ phức tạp thấp thông qua trợ lý AI hội thoại, đồng thời đảm bảo các trường hợp nhạy cảm (tra soát, gian lận, khiếu nại) luôn được chuyển cho nhân viên con người kèm đầy đủ ngữ cảnh.</p>
+
+  <h2>2. Prototype tương tác (Vibe Coding demo)</h2>
+  <p>Prototype giao diện tĩnh được xây dựng bằng kỹ thuật "vibe coding" hỗ trợ bởi GenAI, nhằm thống nhất UX và luồng hội thoại với các bên liên quan trước khi đầu tư thời gian phát triển. Thử ngay bên dưới — bấm vào gợi ý nhanh hoặc nhập câu hỏi:</p>
+
+  <div class="demo-wrap">
+    <div class="chatapp">
+      <div class="chheader">
+        <h4>Trợ lý AI CSKH</h4>
+        <p>Demo tương tác — chưa nối API thật</p>
+      </div>
+      <div class="chatbody" id="chat-vi">
+        <div class="bmsg bot">Chào bạn 👋 Mình có thể giúp kiểm tra số dư, tra soát giao dịch, hoặc tư vấn mở thẻ tín dụng. Bạn cần gì?</div>
+      </div>
+      <div class="qrow">
+        <div class="chip" onclick="tcbSend('vi','Kiểm tra số dư')">Kiểm tra số dư</div>
+        <div class="chip" onclick="tcbSend('vi','Tra soát giao dịch lạ')">Tra soát giao dịch</div>
+        <div class="chip" onclick="tcbSend('vi','Tư vấn mở thẻ tín dụng')">Mở thẻ tín dụng</div>
+        <div class="chip" onclick="tcbSend('vi','Gặp nhân viên hỗ trợ')">Gặp nhân viên</div>
+      </div>
+      <div class="ibar">
+        <input id="in-vi" placeholder="Nhập câu hỏi..." onkeydown="if(event.key==='Enter')tcbSend('vi')">
+        <button onclick="tcbSend('vi')">Gửi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">Đây là prototype tĩnh minh họa UX &amp; luồng hội thoại (rule-matching theo từ khóa) — chưa nối LLM/API thật. Mục đích: thống nhất concept với business trước khi AI Engineering build hệ thống production (LLM + RAG trên nội dung chính sách được Compliance phê duyệt).</div>
+
+  <h2>3. Hạn chế &amp; Rủi ro</h2>
+  <ul>
+    <li>Chưa có mô hình ngôn ngữ thật — chỉ minh hoạ luồng/UX; độ chính xác, hallucination, độ trễ cần được đánh giá riêng khi tích hợp mô hình thật.</li>
+    <li>Rủi ro hallucination: bản production phải grounding câu trả lời chính sách bằng RAG trên nội dung đã được Compliance phê duyệt.</li>
+    <li>Quy tắc escalation cần được Risk/Compliance/lãnh đạo CSKH rà soát kỹ — thiếu một trigger escalation (ví dụ liên quan gian lận) là rủi ro ảnh hưởng đến khách hàng thật, không chỉ là một thiếu sót về UX.</li>
+  </ul>
+
+  <h2>4. Khung KPI / Metrics</h2>
+  <table>
+    <tr><th>KPI</th><th>Tần suất</th><th>Chủ trì</th></tr>
+    <tr><td>Tỷ lệ containment / giảm tải</td><td>Hàng tuần</td><td>CSKH Ops</td></tr>
+    <tr><td>Độ chính xác phân loại intent</td><td>Hàng tuần</td><td>AI Engineering</td></tr>
+    <tr><td>Precision &amp; recall của escalation</td><td>Hàng tuần</td><td>Risk/Compliance + CSKH</td></tr>
+    <tr><td>CSAT / tỷ lệ khiếu nại</td><td>Hàng tuần</td><td>CSKH Ops</td></tr>
+  </table>
+</div>
+
+<div data-lang="en" hidden>
+  <div class="badge">PROJECT 3 · GENAI PROTOTYPING</div>
+  <h1>GenAI Customer Service Assistant (Chatbot)</h1>
+  <p class="subtitle">Portfolio demo — Business Data Analyst (AI Products) | Prepared by Kevin Ngo</p>
+  <div class="btnrow">
+    <a class="btn btn-primary" href="Project3_Chatbot_Case_Study.docx">Download full case study (.docx)</a>
+    <a class="btn btn-outline" href="index.html">← Back to overview</a>
+  </div>
+
+  <h2>1. Business Context &amp; Problem Statement</h2>
+  <p>CSKH teams handle a high volume of repetitive, low-complexity requests (balance checks, transaction lookups, basic product inquiries) mixed with genuinely complex cases in the same queue. This inflates average handling time and pulls agent time away from cases that truly need a human.</p>
+  <p><b>Business objective:</b> deflect and speed up resolution of high-volume, low-complexity requests via a conversational AI assistant, while ensuring sensitive cases (disputes, fraud, complaints) are always escalated to a human with full context.</p>
+
+  <h2>2. Interactive Prototype (Vibe Coding demo)</h2>
+  <p>Static front-end prototype built with GenAI-assisted "vibe coding" to align UX and conversational flow with stakeholders before committing engineering time. Try it below — click a quick-reply chip or type a question:</p>
+
+  <div class="demo-wrap">
+    <div class="chatapp">
+      <div class="chheader">
+        <h4>AI Customer Service Assistant</h4>
+        <p>Interactive demo — not connected to a real API</p>
+      </div>
+      <div class="chatbody" id="chat-en">
+        <div class="bmsg bot">Hi there 👋 I can help you check your balance, look into a transaction, or advise on opening a credit card. What do you need?</div>
+      </div>
+      <div class="qrow">
+        <div class="chip" onclick="tcbSend('en','Check my balance')">Check balance</div>
+        <div class="chip" onclick="tcbSend('en','Dispute a transaction')">Dispute a transaction</div>
+        <div class="chip" onclick="tcbSend('en','Open a credit card')">Open credit card</div>
+        <div class="chip" onclick="tcbSend('en','Talk to an agent')">Talk to an agent</div>
+      </div>
+      <div class="ibar">
+        <input id="in-en" placeholder="Type your question..." onkeydown="if(event.key==='Enter')tcbSend('en')">
+        <button onclick="tcbSend('en')">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">This is a static prototype illustrating UX and conversation flow (keyword rule-matching) — not yet connected to a real LLM/API. Purpose: align on the concept with the business before AI Engineering builds the production system (LLM + RAG over policy content approved by Compliance).</div>
+
+  <h2>3. Limitations &amp; Risks</h2>
+  <ul>
+    <li>No real language model yet — this only illustrates flow/UX; accuracy, hallucination, and latency need separate evaluation once a real model is integrated.</li>
+    <li>Hallucination risk: the production version must ground policy answers using RAG over content approved by Compliance.</li>
+    <li>The escalation rule set needs careful review by Risk/Compliance/CSKH leadership — missing one escalation trigger (e.g., fraud-related) is a real customer-impact risk, not just a UX gap.</li>
+  </ul>
+
+  <h2>4. KPI / Metrics Framework</h2>
+  <table>
+    <tr><th>KPI</th><th>Cadence</th><th>Owner</th></tr>
+    <tr><td>Containment / deflection rate</td><td>Weekly</td><td>CSKH Ops</td></tr>
+    <tr><td>Intent classification accuracy</td><td>Weekly</td><td>AI Engineering</td></tr>
+    <tr><td>Escalation precision &amp; recall</td><td>Weekly</td><td>Risk/Compliance + CSKH</td></tr>
+    <tr><td>CSAT / complaint rate</td><td>Weekly</td><td>CSKH Ops</td></tr>
+  </table>
+</div>
+
+<script>
+const responses = {
+  vi: [
+    {k:['số dư','balance'], a:'Số dư khả dụng tài khoản của bạn hiện tại là 12.450.000đ. Bạn có muốn xem 5 giao dịch gần nhất không?'},
+    {k:['giao dịch lạ','tra soát','khiếu nại'], a:'Mình đã ghi nhận yêu cầu tra soát. Hệ thống phát hiện gian lận đang phân tích (ETA phản hồi: 24h). Bạn muốn tạm khoá thẻ trong lúc chờ không?'},
+    {k:['mở thẻ','thẻ tín dụng','credit card'], a:'Dựa trên hồ sơ của bạn, bạn đủ điều kiện xét duyệt nhanh thẻ tín dụng hạn mức 30-50 triệu. Chuyển bạn đến tư vấn viên nhé?'},
+    {k:['nhân viên','hỗ trợ','người thật','agent'], a:'Đang kết nối bạn với chuyên viên CSKH... (bản production sẽ escalate qua hàng đợi CRM có gắn ngữ cảnh hội thoại).'},
+  ],
+  en: [
+    {k:['balance'], a:'Your available account balance is currently 12,450,000₫. Would you like to see your last 5 transactions?'},
+    {k:['dispute','transaction','complaint'], a:"I've logged your dispute request. Our fraud detection system is reviewing it now (ETA: 24h). Would you like to temporarily freeze your card while you wait?"},
+    {k:['credit card','open a credit'], a:"Based on your profile, you're pre-qualified for a credit card with a limit of 30-50M. Shall I connect you with an advisor?"},
+    {k:['agent','support','human'], a:'Connecting you to a customer service specialist... (in production this would escalate through a CRM queue carrying full conversation context).'},
+  ],
+};
+const fallback = {
+  vi: 'Mình chưa có câu trả lời sẵn cho câu này trong bản demo — bản thật sẽ dùng RAG trên dữ liệu chính sách & giao dịch thật.',
+  en: "I don't have a scripted answer for that in this demo — the real version would use RAG over actual policy and transaction data.",
+};
+function tcbBotReply(lang, text){
+  const low = text.toLowerCase();
+  const set = responses[lang] || responses.vi;
+  const hit = set.find(r => r.k.some(k => low.includes(k)));
+  return hit ? hit.a : fallback[lang];
+}
+function tcbAddMsg(lang, text, cls){
+  const chat = document.getElementById('chat-' + lang);
+  const d = document.createElement('div');
+  d.className = 'bmsg ' + cls;
+  d.textContent = text;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+}
+function tcbSend(lang, preset){
+  const input = document.getElementById('in-' + lang);
+  const text = preset || (input ? input.value.trim() : '');
+  if(!text) return;
+  tcbAddMsg(lang, text, 'user');
+  if (input) input.value = '';
+  setTimeout(() => tcbAddMsg(lang, tcbBotReply(lang, text), 'bot'), 450);
+}
+</script>
+</main>
+<script src="lang.js"></script>
+</body>
+</html>
